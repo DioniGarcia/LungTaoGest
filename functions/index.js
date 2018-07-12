@@ -7,7 +7,7 @@ exports.solicitarDatosTarea3 = functions.https.onRequest((req, res) => {
   var idOperario = req.query.id;
   var tareas = [];
 
-  return admin.firestore().collection('operarios').doc(idOperario.toString()).get()
+  return admin.firestore().collection('alumnos').doc(idOperario.toString()).get()
     .then(doc => {
       tareas=doc.get("tareas")
       if (tareas ==null || tareas.length == 0)
@@ -60,12 +60,12 @@ exports.loginOperario = functions.https.onRequest((req, res) => {
   var idOperario = req.query.id;
   var pass = req.query.pass;
 
-  if(admin.firestore().collection("operarios").where("id","==",idOperario).where("pass","==",pass.toString())!=null) {
+  if(admin.firestore().collection("alumnos").where("id","==",idOperario).where("pass","==",pass.toString())!=null) {
     return res.status(200).json({
       "type":"suscessful",
       "id_operario" : idOperario  ,
       "pass" : pass  ,
-      "cosa": admin.firestore().collection("operarios").where("id","==",idOperario).where("pass","==",pass.toString()).get()
+      "cosa": admin.firestore().collection("alumnos").where("id","==",idOperario).where("pass","==",pass.toString()).get()
        }
     );
   }else {
@@ -96,7 +96,7 @@ exports.asignarTarea = functions.https.onRequest((req, res) => {
   var idOperario = req.query.id;
   console.log('Pide una tarea', idOperario);
   //TODO comprobar que funciona como toca...
-  admin.firestore().collection("operarios").doc(idOperario).get().then(snapshot => {
+  admin.firestore().collection("alumnos").doc(idOperario).get().then(snapshot => {
     var etiquetas = snapshot.get("etiquetas")
     var tareas = snapshot.get("tareas")
     console.log('Etiquetas y tareas del operario', etiquetas, tareas);
@@ -124,7 +124,7 @@ exports.asignarTarea = functions.https.onRequest((req, res) => {
                     if (tareas.indexOf(doc.id) < 0) {
                       tareas.push(doc.id)
                     }
-                    admin.firestore().collection("operarios").doc(idOperario).update({"tareas": tareas})
+                    admin.firestore().collection("alumnos").doc(idOperario).update({"tareas": tareas})
                     asignada = true
                     return res.status(200).json({
                       "type": "exito",
@@ -140,7 +140,7 @@ exports.asignarTarea = functions.https.onRequest((req, res) => {
               if (tareas.indexOf(doc.id) < 0) {
                 tareas.push(doc.id)
               }
-              admin.firestore().collection("operarios").doc(idOperario).update({"tareas": tareas})
+              admin.firestore().collection("alumnos").doc(idOperario).update({"tareas": tareas})
               asignada = true
               return res.status(200).json({
                 "type": "exito",
@@ -154,7 +154,7 @@ exports.asignarTarea = functions.https.onRequest((req, res) => {
               if (tareas.indexOf(doc.id) < 0) {
                 tareas.push(doc.id)
               }
-              admin.firestore().collection("operarios").doc(idOperario).update({"tareas": tareas})
+              admin.firestore().collection("alumnos").doc(idOperario).update({"tareas": tareas})
               asignada = true
               return res.status(200).json({
                 "type": "exito",
@@ -193,12 +193,12 @@ exports.finalizarTarea = functions.https.onRequest((req, res) => {
   var idTarea = req.query.idTarea;
   var satisfaccion = req.query.satisfaccion;
   var tareas1 = []
-  admin.firestore().collection("operarios").doc(idOperario.toString()).get().then(snapshot => {
+  admin.firestore().collection("alumnos").doc(idOperario.toString()).get().then(snapshot => {
     console.log('Tareas dentro snapshot.', snapshot.get("tareas"));
     var tareas1 = snapshot.get("tareas")
     tareas1.indexOf(parseInt(idTarea))
     tareas1.splice(tareas1.indexOf(parseInt(idTarea)), 1)
-    admin.firestore().collection("operarios").doc(idOperario.toString()).update({"tareas": tareas1}).then(function () {
+    admin.firestore().collection("alumnos").doc(idOperario.toString()).update({"tareas": tareas1}).then(function () {
       admin.firestore().collection("asignadas").doc(idTarea).get().then(tarea =>{
         admin.firestore().collection("finalizadas").doc(tarea.id).set(tarea.data()).then(function () {
           admin.firestore().collection("finalizadas").doc(tarea.id).update({"operario" : idOperario, "satisfaccion":parseInt(satisfaccion)})
@@ -239,7 +239,7 @@ exports.PruebasAbry = functions.https.onRequest((req, res) => {
   var etiquetasTarea = ["CASA", "CACA", "COLOFON"]
   var entra = false
   try {
-    etiquetas = admin.firestore().collection("operarios").doc(idOperario.toString()).onSnapshot(snapshot=>{
+    etiquetas = admin.firestore().collection("alumnos").doc(idOperario.toString()).onSnapshot(snapshot=>{
       var etiquetas=snapshot.get("etiquetas")
       var tareas=snapshot.get("tareas")
       for( i=0;i<etiquetasTarea.length;i++) {

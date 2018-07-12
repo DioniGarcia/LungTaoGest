@@ -9,7 +9,10 @@
 
       <b-navbar-nav>
         <b-nav-item class="nav-item">
-          <img src="../assets/wnLogo.png" alt="LungTao" height="50px" width="65px">
+          <img src="../assets/wnLogo.png" alt="LungTao" height="55px" width="75px">
+        </b-nav-item>
+        <b-nav-item class="nav-item">
+          <h1 >LungTao</h1>
         </b-nav-item>
         <b-nav-item class="nav-item"><router-link class="menu-item" to="/dashboard">Inicio</router-link></b-nav-item>
         <b-nav-item class="nav-item"><router-link class="menu-item" to="/gestionoperarios">Alumnos</router-link></b-nav-item>
@@ -25,7 +28,7 @@
           <template slot="button-content">
             <em class="menu-item">Bienvenido/a: {{currentUser}}</em>
           </template>
-          <b-dropdown-item @click="logout">Logout</b-dropdown-item>
+          <b-dropdown-item @click="logout">Salir usuario</b-dropdown-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>
 
@@ -70,7 +73,7 @@
 
   .bg-info {
     /*background: linear-gradient(to bottom, #bcede9, #599693) !important;*/
-    background: #81cac7; /* Old browsers */
+    background: #ca7464; /* Old browsers */
     background: -moz-linear-gradient(top, #eda28b 0%, #ca6750 40%, #dd0308 100%); /* FF3.6-15 */
     background: -webkit-linear-gradient(top, #eda28b 0%, #ca6750 40%, #dd0308 100%); /* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(to bottom, #eda28b 0%, #ca6750 40%, #dd0308 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
@@ -93,13 +96,14 @@
   nav ul a a:hover {
     color: white;
     background: #81cac7; /* Old browsers */
-    background: -moz-linear-gradient(top, #bcede9 0%, #81cac7 40%, #5e9f9c 88%, #f4ffff 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, #bcede9 0%, #81cac7 40%, #5e9f9c 88%, #f4ffff 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, #bcede9 0%, #81cac7 40%, #5e9f9c 88%, #f4ffff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background: -moz-linear-gradient(top, #edcac4 0%, #ca988d 40%, #dd7d7b 88%, #f4ffff 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #edcac4 0%, #ca988d 40%, #dd7d7b 88%, #f4ffff 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #edcac4 0%, #ca988d 40%, #dd7d7b 88%, #f4ffff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter:  progid:DXImageTransform.Microsoft.gradient( startColorstr='#bcede9', endColorstr='#599693',GradientType=0 );
   }
 
   .nav-item, .nav-item:hover {
+
     margin-bottom: -5px;
     margin-top: -5px;
     backface-visibility: hidden;
@@ -108,9 +112,9 @@
   .white_shadow_hover:hover {
     background: none !important;
     background: #81cac7; /* Old browsers */
-    background: -moz-linear-gradient(top, #bcede9 0%, #81cac7 40%, #5e9f9c 88%, #f4ffff 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, #bcede9 0%, #81cac7 40%, #5e9f9c 88%, #f4ffff 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, #bcede9 0%, #81cac7 40%, #5e9f9c 88%, #f4ffff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background: -moz-linear-gradient(top, #edcac4 0%, #ca988d 40%, #dd7d7b 88%, #f4ffff 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #edcac4 0%, #ca988d 40%, #dd7d7b 88%, #f4ffff 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #edcac4 0%, #ca988d 40%, #dd7d7b 88%, #f4ffff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter:  progid:DXImageTransform.Microsoft.gradient( startColorstr='#bcede9', endColorstr='#599693',GradientType=0 );
   }
 

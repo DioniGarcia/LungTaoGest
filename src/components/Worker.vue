@@ -1,12 +1,10 @@
 <template>
   <div class="wn-task-data">
     <h3>
-      <i v-if="this.conectado" class="conectado-icon" aria-hidden="true"></i>
-      <i v-if="!this.conectado" class="desconectado-icon" aria-hidden="true"></i>
-      Sr/Sra. {{this.apellidos}}
+      {{this.nombre}} {{this.apellidos}}
 
     </h3>
-    <p><b>Nombre completo</b> {{this.nombre}} {{this.apellidos}}</p>
+    <p><b>Nombre completo</b> {{this.nombre}} </p>
     <p><b>Id:</b> {{this.id}}</p>
 
     <div v-if="showMore" class="more-info">
@@ -74,21 +72,6 @@
     padding-right: 0;
   }
 
-  .conectado-icon {
-    background: greenyellow;
-    border-radius: 50px;
-    padding: 0px 6px ;
-    font-size: 9px;
-    margin-right: 4px;
-  }
-
-  .desconectado-icon {
-    background: #db5352;
-    border-radius: 50px;
-    padding: 0px 6px ;
-    font-size: 9px;
-    margin-right: 4px;
-  }
 
 
 
