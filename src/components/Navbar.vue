@@ -1,14 +1,20 @@
 <template>
 
   <b-navbar toggleable="md" type="dark" variant="info">
+
     <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
-    <b-navbar-brand style="cursor: default">WatchNext</b-navbar-brand>
+
+
     <b-collapse is-nav id="nav_collapse">
 
       <b-navbar-nav>
-        <b-nav-item class="nav-item"><router-link class="menu-item" to="/dashboard">Dashboard</router-link></b-nav-item>
-        <b-nav-item class="nav-item"><router-link class="menu-item" to="/gestionoperarios">Gestion Operarios</router-link></b-nav-item>
-        <b-nav-item class="nav-item"><router-link class="menu-item" to="/plantillas">Gestion Plantillas</router-link></b-nav-item>
+        <b-nav-item class="nav-item">
+          <img src="../assets/wnLogo.png" alt="LungTao" height="50px" width="65px">
+        </b-nav-item>
+        <b-nav-item class="nav-item"><router-link class="menu-item" to="/dashboard">Inicio</router-link></b-nav-item>
+        <b-nav-item class="nav-item"><router-link class="menu-item" to="/gestionoperarios">Alumnos</router-link></b-nav-item>
+        <b-nav-item class="nav-item"><router-link class="menu-item" to="/plantillas">Gestiones</router-link></b-nav-item>
+        <b-nav-item class="nav-item"><router-link class="menu-item" to="/plantillas">Antiguos Alumnos</router-link></b-nav-item>
       </b-navbar-nav>
 
       <!-- Right aligned nav items -->
@@ -17,7 +23,7 @@
         <b-nav-item-dropdown right>
           <!-- Using button-content slot -->
           <template slot="button-content">
-            <em class="menu-item">{{currentUser}}</em>
+            <em class="menu-item">Bienvenido/a: {{currentUser}}</em>
           </template>
           <b-dropdown-item @click="logout">Logout</b-dropdown-item>
         </b-nav-item-dropdown>
@@ -65,9 +71,9 @@
   .bg-info {
     /*background: linear-gradient(to bottom, #bcede9, #599693) !important;*/
     background: #81cac7; /* Old browsers */
-    background: -moz-linear-gradient(top, #bcede9 0%, #81cac7 40%, #599693 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, #bcede9 0%, #81cac7 40%,#599693 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, #bcede9 0%, #81cac7 40%,#599693 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background: -moz-linear-gradient(top, #eda28b 0%, #ca6750 40%, #dd0308 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #eda28b 0%, #ca6750 40%, #dd0308 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #eda28b 0%, #ca6750 40%, #dd0308 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bcede9', endColorstr='#599693',GradientType=0 );
   }
 

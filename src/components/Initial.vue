@@ -1,4 +1,6 @@
 <template>
+
+
   <body class="flex-box text-center" >
   <div class="flex-box background">
     <div class="flex-box cover-container d-flex h-100 p-3 mx-auto flex-column" >
@@ -6,7 +8,7 @@
       <div class="flex-box">
 
         <transition name="fade">
-          <h1 class="cover-heading welcome" v-if="showTitle" v-animation>LungTaoGest®</h1>
+          <h1 class="cover-heading welcome" v-if="showTitle" v-animation>Lung Tao Gest®</h1>
         </transition>
         <transition name="lupa">
           <img v-show="showIcon" @click="handleClickIcon" class="logo reflex" src="../assets/wnLogo.png" title="Login"/>
@@ -15,18 +17,18 @@
         <el-dialog style="margin-top:-50px"
 
                    :visible.sync="showLogin"
-                   width="460px"
+                   width="560px"
                    :show-close="false"
                    :close-on-press-escape="false"
                    :close-on-click-modal="false"
         >
-          <h1 style="margin-top:-30px; padding-bottom:30px;">Login</h1>
+          <h1 style="margin-top:-30px; padding-bottom:30px;">Autenticación</h1>
           <div style="height:140px; margin-left:-20px; margin-right:-20px; margin-bottom:30px; background:indianred">
             <img style="width:100px; height:100px; margin-top:20px;" class="logo" src="../assets/wnLogo.png" title="Login"/>
           </div>
           <el-form ref="form" :model="form" label-position="left" label-width="120px">
-            <el-form-item label="Usuario:"  required >
-              <el-input  type="text" v-model="email" placeholder="Usuario"></el-input>
+            <el-form-item label="Correo:"  required >
+              <el-input  type="text" v-model="email" placeholder="Email"></el-input>
             </el-form-item>
             <el-form-item label="Contraseña:"  required >
               <el-input  type="password" v-model="password" placeholder="Contraseña"></el-input>
@@ -34,7 +36,8 @@
           </el-form>
 
           <span slot="footer" class="dialog-footer">
-            <el-button class="btn-login reflex" type="primary" @click="handleLogin">Login</el-button>
+            <el-button class="btn-login reflex" type="primary" @click="handleLogin">Aceptar</el-button>
+            <el-button class="btn-login reflex" type="primary" @click="handlePrevious">Cancelar</el-button>
           </span>
         </el-dialog>
 
@@ -61,7 +64,11 @@
       };
     },
     methods: {
-
+      handlePrevious: function(){
+        this.showLogin = false;
+        this.showIcon = true;
+        this.showTitle = true;
+      },
       handleClickIcon: function() {
         this.showIcon=false
         this.showTitle=false
@@ -102,6 +109,10 @@
 </script>
 
 <style scoped>
+
+  h1{
+    font-family:'Shanghai', arial;
+  }
 
   .welcome {
     color: whitesmoke;
@@ -147,8 +158,8 @@
   }
 
   .btn-login {
-    padding-left:  120px;
-    padding-right: 120px;
+    padding-left:  30px;
+    padding-right: 30px;
     margin-top: -40px;
     margin-bottom: 20px;
     margin-right: 14%;
