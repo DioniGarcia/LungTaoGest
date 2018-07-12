@@ -6,7 +6,7 @@
       <div class="flex-box">
 
         <transition name="fade">
-          <h1 class="cover-heading welcome" v-if="showTitle" v-animation>WatchNext®</h1>
+          <h1 class="cover-heading welcome" v-if="showTitle" v-animation>LungTaoGest®</h1>
         </transition>
         <transition name="lupa">
           <img v-show="showIcon" @click="handleClickIcon" class="logo reflex" src="../assets/wnLogo.png" title="Login"/>
@@ -21,7 +21,7 @@
                    :close-on-click-modal="false"
         >
           <h1 style="margin-top:-30px; padding-bottom:30px;">Login</h1>
-          <div style="height:140px; margin-left:-20px; margin-right:-20px; margin-bottom:30px; background:cadetblue">
+          <div style="height:140px; margin-left:-20px; margin-right:-20px; margin-bottom:30px; background:indianred">
             <img style="width:100px; height:100px; margin-top:20px;" class="logo" src="../assets/wnLogo.png" title="Login"/>
           </div>
           <el-form ref="form" :model="form" label-position="left" label-width="120px">
@@ -154,7 +154,7 @@
     margin-right: 14%;
     font-size: 21px;
     border-radius: 50px;
-    background: cadetblue;
+    background: indianred;
   }
 
   .reflex:hover {
@@ -177,8 +177,8 @@
     -moz-transition-duration: 0.5s;
     -webkit-transition-duration: 0.5s;
     -o-transition-duration: 0.5s;
-    height: 250px;
-    width: 250px;
+    height: 350px;
+    width: 460px;
   }
 
   div.flex-box {
