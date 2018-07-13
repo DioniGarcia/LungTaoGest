@@ -14,6 +14,8 @@
                 :id=operario.id
                 :nombre=operario.nombre
                 :apellidos=operario.apellidos
+                :nacimiento=operario.nacimiento
+                :disciplina=operario.disciplina
                 :tags=operario.tags
                 :show-more=operario.showMore
                 :conectado=operario.conectado
@@ -172,6 +174,7 @@
         frm_apellidos: '',
         frm_born: '',
         frm_disc: '',
+        frm_dni:'',
         frm_license: '',
         frm_date_ll: '',
         frm_grade: '',
@@ -310,22 +313,27 @@
         var transaction = db.runTransaction( async t => {
           return t.get(autRef)
             .then(doc => {
-              console.log('holi')
+
               var newOp = doc.data().alumnos + 1;
+
+              console.log('Valor: '+newOp)
+
               this.id = newOp;
+
               db.collection('alumnos').doc(newOp.toString()).set({
 
                 nombre: this.frm_nombre,
                 apellidos: this.frm_apellidos,
                 dni: this.frm_dni,
                 disciplina: this.frm_disc,
-                nLicencia: doc.data().nLicencia,
-                dLLicencia: doc.data().dLLicencia,
-                grado: doc.data().grado,
-                cuota: doc.data().cuota,
+                nacimiento: this.frm_born,
+                nLicencia: this.frm_license,
+                dLLicencia: this.frm_date_ll,
+                grado: this.frm_grade,
+                cuota: this.frm_payment,
 
                 id: doc.id, // El autoincrement de FB
-                tags: doc.data().etiquetas,
+                tags: this.frm_etiquetas,
                 showMore: false,
 
 
@@ -347,17 +355,13 @@
                 }).catch(error => {
                   console.error('Error añadiendo el alumnoo!', error)
                 });
-              t.update(autRef, {alumnosos: newOp});
+              t.update(autRef, {alumnos: newOp});
             })
         })
       },
 
       handleSubmit() {
-        /*
-        this.alumnos.push(
-          {nombre: this.frm_nombre, apellidos: this.frm_apellidos,
-            pass: this.frm_pass, id:this.id, etiquetas:this.frm_etiquetas}
-        );*/
+
         this.cleanForm();
       },
 
@@ -376,9 +380,11 @@
       },
 
       cleanForm() {
+        console.log('faig')
         this.frm_nombre = '';
         this.frm_apellidos = '';
-
+        this.frm_disc = '';
+        this.frm_grade = '';
         this.frm_dni = '';
         this.frm_born = '';
         this.frm_payment = '';

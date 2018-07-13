@@ -1,281 +1,30 @@
 <template>
   <div id="dashboard">
     <Navbar />
+
     <div class="wn-col col-pendientes">
-      <div class="wn-col-title">Tareas Sin Asignar
-        <el-button @click="cleanForm(),dialogVisible = true" class="wn-menu-btn">Nueva tarea</el-button>
-      </div>
+      <img src="../assets/kfh2.jpg">
+        <el-button class="btn-login reflex" type="primary" @click="handleLogin">Aceptar</el-button>
 
-      <div class="wn-col-container scrollbar">
-        <div v-for="task in tasks_sin_asignar" v-bind:key="task.id" class="wn-task-container"><!--scroll-->
-          <Task
-            :id=task.id
-            :titulo=task.titulo
-            :operario=task.operario
-            :duracion=task.duracion
-            :estimado=task.estimado
-            :prioridad=task.prioridad
-            :showMore=task.showMore
-            :descripcion=task.descripcion
-            :pausable=task.pausable
-            :tags=task.tags
-            :h_inicio="task.h_inicio"
-          />
-          <div class="wn-btn-div">
-            <button @click="deleteTask(task.id)" class="wn-menu-btn"><i class="fa fa-close " aria-hidden="true"></i></button>
-            <button @click="fillData(task.id), dialogEditVisible = true" class="wn-menu-btn"><i class="fa fa-edit " aria-hidden="true"></i></button>
-            <button v-if="!task.showMore" @click="task.showMore=true" class="wn-menu-btn"><i class="fa fa-eye " aria-hidden="true"></i></button>
-            <button v-if="task.showMore" @click="task.showMore=false" class="wn-menu-btn"><i class="fa fa-eye-slash " aria-hidden="true"></i></button>
-          </div>
-        </div>
-      </div>
+
+
     </div>
 
-
-                                                                              <!-- REFACTORIZAR!!! -->
     <div class="wn-col col-asignadas">
-      <div class="wn-col-title">Tareas Asignadas</div>
-        <div class="wn-col-container">
-          <div v-for="task in tasks_asignadas" v-bind:key="task.id" class="wn-task-container">
-            <TaskActiva
-              :id=task.id
-              :titulo=task.titulo
-              :operario=task.operario
-              :duracion=task.duracion
-              :estimado=task.estimado
-              :prioridad=task.prioridad
-              :showMore=task.showMore
-              :descripcion=task.descripcion
-              :pausable=task.pausable
-              :tags=task.tags
-              :h_inicio="task.h_inicio"
-            />
-            <div class="wn-btn-div">
-              <button v-if="!task.showMore" @click="task.showMore=true" class="wn-menu-btn"><i class="fa fa-eye " aria-hidden="true"></i></button>
-              <button v-if="task.showMore" @click="task.showMore=false" class="wn-menu-btn"><i class="fa fa-eye-slash " aria-hidden="true"></i></button>
-            </div>
-          </div>
-        </div>
+      <img src="../assets/kf1.jpg"></img>
+      <el-button class="btn-login reflex" type="primary" @click="handlePrevious">Cancelar</el-button>
     </div>
-
-
 
 
     <div class="wn-col col-realizadas">
-      <div class="wn-col-title ">Tareas Realizadas</div>
-        <div class="wn-col-container">
-          <div v-for="task in tasks_realizadas" v-bind:key="task.id" class="wn-task-container">
-            <Task
-              :id=task.id
-              :titulo=task.titulo
-              :operario=task.operario
-              :duracion=task.duracion
-              :estimado=task.estimado
-              :prioridad=task.prioridad
-              :showMore=task.showMore
-              :descripcion=task.descripcion
-              :pausable=task.pausable
-              :tags=task.tags
-              :h_inicio="task.h_inicio"
-            />
-            <div class="wn-btn-div">
-              <button v-if="!task.showMore" @click="task.showMore=true" class="wn-menu-btn"><i class="fa fa-eye " aria-hidden="true"></i></button>
-              <button v-if="task.showMore" @click="task.showMore=false" class="wn-menu-btn"><i class="fa fa-eye-slash " aria-hidden="true"></i></button>
-            </div>
-          </div>
-        </div>
+      <img src="../assets/kf1.jpg"></img>
+      <el-button class="btn-login reflex" type="primary" @click="handlePrevious">Cancelar</el-button>
     </div>
 
 
-
-    <!-- Modal Add Tarea -->
-    <el-dialog
-        title="Nueva tarea"
-        :visible.sync="dialogVisible"
-        width="65%">
-
-      <el-container>
-        <el-aside class="modal-col-plantillas" width="22%">
-          <b-input-group>
-
-            <b-form inline>
-              <i class="material-icons prefix">search</i>
-              <b-input style="width: 120px; margin-left: 10px; margin-right: 8px" v-model="searchWord" placeholder="Buscar" />
-              <i :disabled="!searchWord" @click="searchWord = ''" class="fa fa-times-circle prefix"></i>
-            </b-form>
-          </b-input-group>
-
-          <el-table
-            :data="filteredTemplates"
-
-            @current-change="handleCurrentChange"
-            :show-header="true"
-            height="480px"
-            max-height="480px"
-          >
-            <el-table-column
-              style="color: orange"
-              prop="titulo"
-              label="Plantillas"
-              width="180"
-              row
-            >
-
-            </el-table-column>
-
-          </el-table>
-
-        </el-aside>
-
-        <el-container>
-          <div class="modal-col-data">
-            <el-form ref="form" label-position="left" label-width="120px">
-
-              <el-form-item label="Título"  required >
-                <el-input  type="text" v-model="frm_titulo" placeholder="Nombre de la tarea"></el-input>
-              </el-form-item>
-
-              <el-container>
-                <el-aside>
-                  <el-form-item label="Prioridad" required>
-                    <el-select v-model="frm_prioridad" placeholder="Medio">
-                      <el-option
-                        v-for="item in prioridades"
-                        :key="item.value"
-                        :label="item.text"
-                        :value="item.value">
-                      </el-option>
-                    </el-select>
-                  </el-form-item>
-                </el-aside>
-
-                <el-container>
-                  <el-form-item label="T. estimado"  required>
-                    <el-input v-model="frm_estimado" placeholder="30" style="width: 20%"></el-input>
-                  </el-form-item>
-                </el-container>
-              </el-container>
-
-              <el-form-item label="Descripción" required>
-                <el-input type="textarea" v-model="frm_descripcion" placeholder="Descripción de la tarea"></el-input>
-              </el-form-item>
-
-              <el-form-item label="Etiquetas"  required>
-                <el-tag
-                  :key="tag"
-                  v-for="tag in frm_etiquetas"
-                  closable
-                  :disable-transitions="false"
-                  @close="handleClose(tag)">
-                  {{tag}}
-                </el-tag>
-
-                <el-autocomplete
-                  style="width: 42%; font-size: 10px"
-                  class="input-new-tag"
-                  v-if="inputVisible"
-                  v-model="inputValue"
-                  size="small"
-
-                  :fetch-suggestions="querySearch"
-                  placeholder="Nombre nueva etiqueta"
-                  @keyup.enter.native="handleInputConfirm"
-                  @select="handleSelectTag"
-                  >
-                </el-autocomplete>
-
-                <el-button v-else class="button-new-tag" size="small" @click="showInput">+ Nuevo tag</el-button>
-              </el-form-item>
-
-              <el-switch  active-text="Pausable" v-model="frm_pausable"></el-switch>
-
-            </el-form>
-          </div>
-
-          <el-footer class="modal-footer">
-            <el-button @click="clearFields">Borrar campos</el-button>
-            <el-button @click="dialogVisible = false">Cancelar</el-button>
-            <el-button type="primary" @click="createTask">Confirmar</el-button>
-
-          </el-footer>
-        </el-container>
-
-      </el-container>
-
-    </el-dialog>
-
-
-    <!-- FIN: Modal Add Tarea -->
-
-    <!-- Modal EDIT Tarea -->
-    <el-dialog
-      title="Editar tarea"
-      :visible.sync="dialogEditVisible"
-      width="65%">
-
-      <el-form ref="form" label-position="left" label-width="120px">
-
-        <el-form-item label="Título:"  required >
-          <el-input  type="text" v-model="frm_titulo" placeholder="Nombre de la tarea"></el-input>
-        </el-form-item>
-
-        <el-form-item label="Prioridad:" required>
-          <el-select v-model="frm_prioridad" placeholder="Medio">
-            <el-option
-              v-for="item in prioridades"
-              :key="item.value"
-              :label="item.text"
-              :value="item.value">
-            </el-option>
-          </el-select>
-        </el-form-item>
-
-        <el-form-item label="Descripción:" required>
-          <el-input type="textarea" v-model="frm_descripcion" placeholder="Descripción de la tarea"></el-input>
-        </el-form-item>
-
-        <el-form-item label="T. estimado:"  required>
-          <el-input v-model="frm_estimado" placeholder="30" style="width: 10%"></el-input>
-        </el-form-item>
-
-
-
-        <el-form-item label="Etiquetas:"  required>
-          <el-tag
-            :key="tag"
-            v-for="tag in frm_etiquetas"
-            closable
-            :disable-transitions="false"
-            @close="handleClose(tag)">
-            {{tag}}
-          </el-tag>
-
-          <el-autocomplete
-            style="width: 23%; font-size: 10px"
-            class="input-new-tag"
-            v-if="inputVisible"
-            v-model="inputValue"
-            ref="saveTagInput"
-            :fetch-suggestions="querySearch"
-            placeholder="Nombre nueva etiqueta"
-            @keyup.enter.native="handleInputConfirm"
-            @select="handleSelectTag">
-          </el-autocomplete>
-
-          <el-button v-else class="button-new-tag" size="small" @click="showInput">+ Nuevo tag</el-button>
-        </el-form-item>
-        <el-switch  active-text="Pausable" v-model="frm_pausable"></el-switch>
-      </el-form>
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="resetFields">Restablecer campos</el-button>
-        <el-button @click="dialogEditVisible = false">Cancel</el-button>
-        <el-button type="primary" @click="editTask">Confirm</el-button>
-      </span>
-    </el-dialog>
-    <!-- FIN: Modal EDIT Tarea -->
-
-
   </div>
+
+
 
 </template>
 
@@ -901,7 +650,10 @@
     width: 2px;
     float: right;
   }
+  div.options {
+    margin-top: 3px
 
+  }
   .el-button {
     margin-top: 3px !important;
   }
@@ -997,6 +749,28 @@
       opacity: 100;
       height: 73px;
     }
+  }
+
+  body {
+    width: 100%;
+    height: 100%;
+    background-image: url("../assets/background.png") ;
+    background-position: center center;
+    background-repeat:  no-repeat;
+    background-attachment: fixed;
+    background-size:  cover;
+    background-color: #999;
+  }
+
+  .btn-opt {
+    padding-left:  30px;
+    padding-right: 30px;
+    margin-top: -40px;
+    margin-bottom: 20px;
+    margin-right: 14%;
+    font-size: 21px;
+    border-radius: 50px;
+    background: indianred;
   }
 
 </style>

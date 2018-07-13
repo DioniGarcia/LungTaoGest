@@ -583,7 +583,7 @@
     height: 100%;
   }
   div.wn-col-title {
-    background: cadetblue;
+    background: indianred;
     color: white;
     font-size: 16px;
     padding-bottom: 2px;
@@ -652,7 +652,7 @@
   button.wn-menu-btn {
     border: none;
     background: whitesmoke;
-    color: cadetblue;
+    color: indianred;
     font-size: 12px;
     float: right;
     width: 140px;
@@ -696,12 +696,12 @@
 
   .fondo-buscador {
     background-color: #ffffff;
-    color: #5f9ea0;
+    color: indianred;
 
     /*border-top:    solid  2px whitesmoke;*/
-    border-left:   solid   1px #5F9EA0;
-    border-right:  solid   1px #5F9EA0;
-    border-bottom: solid   1px #5F9EA0;
+    border-left:   solid   1px indianred;
+    border-right:  solid   1px indianred;
+    border-bottom: solid   1px indianred;
     border-bottom-radius: 50px;
     padding-left: 40px !important;
   }

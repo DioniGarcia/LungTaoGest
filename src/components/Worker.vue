@@ -4,11 +4,11 @@
       {{this.nombre}} {{this.apellidos}}
 
     </h3>
-    <p><b>Nombre completo</b> {{this.nombre}} </p>
-    <p><b>Id:</b> {{this.id}}</p>
+    <p><b>Disciplina: </b> {{this.disciplina}} </p>
+    <p><b>Fecha nacimiento:</b> {{this.nacimiento}}</p>
 
     <div v-if="showMore" class="more-info">
-      <p><b>Etiquetas:</b></p>
+      <p><b>Títulos: </b></p>
       <div class="el-tag" v-for="t in this.tags"><p>{{t}}</p></div>
     </div>
 
@@ -28,6 +28,8 @@
       'nombre',
       'apellidos',
       'tags',
+      'nacimiento',
+      'disciplina',
       'showMore',
       'conectado'
     ]
@@ -37,7 +39,7 @@
 <style scoped>
 
   b {
-    color: cadetblue;
+    color: indianred;
   }
 
   .end-line {
@@ -50,20 +52,20 @@
   .el-tag {
     margin-top:  12px;
     padding-top: 0px;
-    background: cadetblue;
+    background: indianred;
   }
 
   .el-tag p {
     padding: 0;
     font-size: 10px;
-    color: whitesmoke;
+    color: rgba(205, 92, 92, 0.15);
   }
 
   div.more-info {
     padding-left: 0;
     margin-left: 0;
     margin-top: 14px;
-    border-top:  1px solid cadetblue;
+    border-top:  1px solid indianred;
     width: 120%;
   }
 
