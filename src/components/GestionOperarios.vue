@@ -31,11 +31,12 @@
             </div>
         </div>
       </div>
-      <!-- Modal NUEVO Operario -->
+      <!-- Modal NUEVO Alumno -->
       <el-dialog
         title="Alta nuevo alumno"
         :visible.sync="dialogVisible"
-        width="65%">
+        width="45%"
+        >
 
         <el-form ref="modal_new_worker"  label-position="left" label-width="120px">
           <el-form-item label="Nombre:"  required >
@@ -68,7 +69,7 @@
 
 
 
-          <el-form-item label="Etiquetas:"  required>
+          <el-form-item label="Títulos:"  required>
             <el-tag
               :key="tag"
               v-for="tag in frm_etiquetas"
